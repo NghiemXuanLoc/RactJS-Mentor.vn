@@ -47,6 +47,7 @@ root.render(
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/myaccount/:id" element={<MyAccount />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
         </Provider>
