@@ -9,19 +9,19 @@ function ProviderLogin({ children }) {
 
     const [userList, setUserList] = useState([]);
 
-    const [orderList, setOrderList] = useState([]);
-
-    const [productList, setProductList] = useState([]);
-
     const [searchTerm, setSearchTerm] = useState("");
 
-    const [reviewList, setReviewList] = useState([]);
+    const [questions, setQuestions] = useState([]);
+
+    const [tags, setTags] = useState([]);
+
+    const [roles, setRoles] = useState([]);
 
     useEffect(() => {
         fetchUsers();
-        fetchOrders();
-        fetchProducts();
-        fetchReviews();
+        fetchQuestions();
+        fetchTags();
+        fetchRoles();
     }, [])
 
     const fetchUsers = async () => {
@@ -30,45 +30,66 @@ function ProviderLogin({ children }) {
     };
 
 
-    const fetchOrders = async () => {
-        const response = await axios.get('http://localhost:9999/orders');
-        setOrderList(response.data);
+    const fetchQuestions = async () => {
+        const response = await axios.get('http://localhost:9999/questions');
+        setQuestions(response.data);
     };
 
-    const fetchProducts = async () => {
-        const response = await axios.get('http://localhost:9999/products');
-        setProductList(response.data);
+    const fetchTags = async () => {
+        const response = await axios.get('http://localhost:9999/tags');
+        setTags(response.data);
     };
 
-    const fetchReviews = async () => {
-        const response = await axios.get('http://localhost:9999/reviews');
-        setReviewList(response.data);
-      };
+    const fetchRoles = async () => {
+        const response = await axios.get('http://localhost:9999/roles');
+        setRoles(response.data);
+    };
 
-    const getProductById = (id) => {
-        return productList.find(product => {
-            if(product.id == id){
+    const getUserByUserId = (id) => {
+        return userList.find(user => {
+            if (user.id == id) {
                 return true;
             }
         })
     }
 
-    const getUserByUserId = (id) => {
-        return userList.find(user => {
-            if(user.id == id){
+    const getQuestionById = (id) => {
+        return questions.find(question => {
+            if (question.id == id) {
                 return true;
             }
         })
+    }
+
+    const getRoleIdByRoleName = (name) => {
+        return roles.find(role => {
+            if (role.name.toLowerCase() == name.toLowerCase()) {
+                return true;
+            }
+        })
+    }
+    const getQuestionIdMax = () => {
+        var idMax = -1;
+        questions.forEach(q => {
+            if (idMax < q.id) {
+                idMax = q.id;
+            }
+        });
+
+        return idMax + 1;
     }
 
     let value = {
         isLogin, setIsLogin,
         userList, setUserList,
-        orderList, setOrderList,
-        productList, setProductList,
-        getProductById, getUserByUserId,
+        getUserByUserId,
         searchTerm, setSearchTerm,
-        reviewList, setReviewList
+        questions, setQuestions,
+        tags, setTags,
+        getQuestionById,
+        getQuestionIdMax,
+        roles, setRoles,
+        getRoleIdByRoleName
     }
     return (
         <context.Provider value={value}>

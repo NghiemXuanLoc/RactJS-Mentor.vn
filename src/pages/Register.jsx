@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const Register = () => {
 
-    const { userList, setUserList } = useContext(context);
+    const { userList, setUserList,getRoleIdByRoleName } = useContext(context);
 
     const getUserIdMax = () => {
         let idMax = 0;
@@ -28,7 +28,7 @@ const Register = () => {
         "username": "",
         "email": "",
         "password": "",
-        "roleId": 1,
+        "roleId": getRoleIdByRoleName("Student"),
         "phoneNumber": '',
         "address": "",
         "description": ""

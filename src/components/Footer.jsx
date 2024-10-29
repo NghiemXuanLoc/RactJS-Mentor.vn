@@ -6,7 +6,7 @@ const Footer = () => {
       <footer className="mb-0 text-center bg-secondary" style={{color: 'white'}}>
         <div className="d-flex align-items-center justify-content-center pb-5">
           <div className="col-md-6">
-            <p className="mb-3 mb-md-0">Made with ❤️ by Nghiem Xuan Loc</p>
+            <p className="mb-3 mb-md-0">Made with ❤️ by Nguyen Vu Tran Tin</p>
           </div>
         </div>
       </footer>

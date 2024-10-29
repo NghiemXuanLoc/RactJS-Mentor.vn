@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 
-import { Navbar, Main, Product, Footer } from "../components";
+import { Navbar, Footer } from "../components";
 import { useParams } from "react-router-dom";
 import { context } from "../contexts/ProviderLogin";
 import '../css/StyleMyAccount.css'
@@ -11,7 +11,7 @@ function MyAccount() {
 
     const { id } = useParams();
 
-    const { getUserByUserId, userList, setUserList } = useContext(context);
+    const { getUserByUserId, userList, setUserList, roles } = useContext(context);
 
     const [changePassword, setChangepassword] = useState(false);
     const [changeProfile, setChangeProfile] = useState(false);
@@ -130,7 +130,7 @@ function MyAccount() {
                         className="profile-avatar img-fluid"
                     />
                     <h1 className="profile-name">{user.username}</h1>
-                    <p className="profile-bio">Customer</p>
+                    <p className="profile-bio">{roles.find(x => x.id == user.roleId)?.name}</p>
                 </div>
                 <div className="profile-details">
                     <h2>About Me</h2>
