@@ -20,6 +20,7 @@ import ProviderLogin from "./contexts/ProviderLogin";
 import MyAccount from "./pages/MyAccount";
 import Questions from "./pages/Questions";
 import QuestionDetail from "./pages/QuestionDetail";
+import Dashboard from "./pages/Admin/Dashboard";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -41,6 +42,7 @@ root.render(
     <Provider store={store}>
         <Routes>
           <Route path="/" element={<Questions />} />
+          <Route path="/admin" element={<Dashboard />} />
           <Route path="/questions" element={<Questions />} />
           <Route path="/questionDetail/:id" element={<QuestionDetail/>} />
           <Route path="/about" element={<AboutPage />} />

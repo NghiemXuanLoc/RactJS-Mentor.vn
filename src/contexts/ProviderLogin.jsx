@@ -68,6 +68,14 @@ function ProviderLogin({ children }) {
             }
         })
     }
+
+    const getRoleByRoleId = (id) => {
+        return roles.find(role => {
+            if (role.id == id) {
+                return true;
+            }
+        })
+    }
     const getQuestionIdMax = () => {
         var idMax = -1;
         questions.forEach(q => {
@@ -89,7 +97,7 @@ function ProviderLogin({ children }) {
         getQuestionById,
         getQuestionIdMax,
         roles, setRoles,
-        getRoleIdByRoleName
+        getRoleIdByRoleName, getRoleByRoleId
     }
     return (
         <context.Provider value={value}>

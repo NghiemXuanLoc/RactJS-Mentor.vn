@@ -31,7 +31,8 @@ const Register = () => {
         "roleId": getRoleIdByRoleName("Student"),
         "phoneNumber": '',
         "address": "",
-        "description": ""
+        "description": "",
+        "isDeleted": false
     });
 
 

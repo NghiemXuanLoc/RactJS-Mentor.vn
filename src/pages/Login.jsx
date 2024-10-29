@@ -5,7 +5,7 @@ import { context } from "../contexts/ProviderLogin";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const { isLogin, setIsLogin, userList, setUserList } = useContext(context);
+  const { isLogin, setIsLogin, userList, setUserList, roles } = useContext(context);
 
   const [account, setAccount] = useState({
     email: '',
@@ -25,6 +25,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    var userLogin;
     if (account.email == '' || account.password == '') {
       toast.error("Please complete all information");
     } else {
@@ -33,14 +34,25 @@ const Login = () => {
       userList.forEach(user => {
         if (user.email == account.email && user.password == account.password) {
           checkAccount = user.id;
+          userLogin = user;
         }
       });
 
-      if(checkAccount != -1){
+      if (checkAccount != -1) {
         setIsLogin(checkAccount);
+        var checkAdmin = false;
+        roles.forEach(role => {
+          if (role.id == userLogin.roleId && role.name.toLowerCase() == "admin") {
+            checkAdmin = true;
+          }
+        })
 
-        navigate("/");
-      }else{
+        if (checkAdmin) {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
+      } else {
         toast.error("Email or password is incorrect");
       }
     }
