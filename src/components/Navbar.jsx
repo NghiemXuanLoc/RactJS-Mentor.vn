@@ -25,7 +25,7 @@ const Navbar = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        navigate("/product");
+        navigate("/questions");
     }
 
     return (
@@ -55,9 +55,9 @@ const Navbar = () => {
                             value={searchTerm}
                             onInput={handleSearch}
                         />
-                        <Link to={`/product`} className="btn btn-outline-success" type="submit">
+                        <button className="btn btn-outline-success" type="submit">
                             Search
-                        </Link>
+                        </button>
                     </form>
 
 

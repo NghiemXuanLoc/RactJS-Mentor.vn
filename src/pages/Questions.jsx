@@ -7,11 +7,22 @@ import { toast } from "react-toastify";
 
 function Questions() {
 
-    const { getRoleIdByRoleName, getQuestionIdMax, isLogin, questions, setQuestions, tags, setTags, getUserByUserId } = useContext(context);
+    const { searchTerm, setSearchTerm, getRoleIdByRoleName, getQuestionIdMax, isLogin, questions, setQuestions, tags, setTags, getUserByUserId } = useContext(context);
 
 
     const [content, setContent] = useState("");
     const [selectedTags, setSelectedTags] = useState([]);
+
+    var questionsFilter = questions.filter(x => {
+        if (searchTerm == '') {
+            return true;
+        } else {
+            if (x.content.toLowerCase().includes(searchTerm.toLowerCase())) {
+                return true;
+            }
+        }
+        return false;
+    })
 
 
     console.log(isLogin);
@@ -115,7 +126,7 @@ function Questions() {
 
                     <tbody>
                         {
-                            questions.map((question, index) => {
+                            questionsFilter.map((question, index) => {
                                 return (
                                     <tr>
                                         <td>{index + 1}</td>
