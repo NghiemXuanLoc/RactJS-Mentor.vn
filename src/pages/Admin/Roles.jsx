@@ -5,15 +5,47 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 function Roles() {
-    const { roles, setRoles } = useContext(context);
+    const { roles, setRoles, questions, setQuestions, userList, setUserList } = useContext(context);
 
     const [newRoleName, setNewRoleName] = useState("");
 
     const [updateRoleName, setUpdateRoleName] = useState({});
 
-    const handleDelete = async (id) => {
-        await deleteRole(id);
+    const fetchQuestions = async () => {
+        const response = await axios.get('http://localhost:9999/questions');
+        setQuestions(response.data);
+    };
+
+    const updateQuestion = async (question) => {
+        await axios.put(`http://localhost:9999/Questions/${question.id}`, question);
+    };
+
+    const updateUser = async (user) => {
+        await axios.put(`http://localhost:9999/users/${user.id}`, user);
+    };
+
+    const fetchUsers = async () => {
+        const response = await axios.get('http://localhost:9999/users');
+        setUserList(response.data);
+    };
+
+    const handleDelete = async (role) => {
+        await deleteRole(role.id);
         await fetchRoles();
+
+        for (const question of questions) {
+            question.RolesAnswer = question.RolesAnswer.filter(roleId => roleId != role.id);
+            await updateQuestion(question);
+        }
+
+        for (const user of userList) {
+            user.roleId = user.roleId == role.id ? null : user.roleId;
+
+            await updateUser(user);
+        }
+
+        await fetchQuestions();
+        await fetchUsers();
 
         toast.success("Delete role success");
     }

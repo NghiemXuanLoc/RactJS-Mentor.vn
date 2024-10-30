@@ -11,10 +11,6 @@
     {
       "id": 3,
       "name": "Admin"
-    },
-    {
-      "name": "new role",
-      "id": 4
     }
   ],
   "users": [
@@ -35,7 +31,7 @@
       "username": "nghiem xuan loc",
       "email": "locnxhe170939@fpt.edu.vn",
       "password": "123456Aa@",
-      "roleId": 1,
+      "roleId": null,
       "phoneNumber": "",
       "address": "",
       "description": "",
@@ -195,6 +191,18 @@
       "modifiedAt": "2024-10-28",
       "answers": [],
       "id": 8
+    },
+    {
+      "id": 9,
+      "content": "dgdgfdfg",
+      "RolesAnswer": [
+        2
+      ],
+      "authorId": 2,
+      "tags": [],
+      "createdAt": "2024-10-30",
+      "modifiedAt": "2024-10-30",
+      "answers": []
     }
   ]
 }
