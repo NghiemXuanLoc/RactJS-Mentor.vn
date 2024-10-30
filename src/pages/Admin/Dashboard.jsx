@@ -9,9 +9,10 @@ import Questions from "./Questions";
 import Roles from "./Roles";
 import Tags from "./Tags";
 import UserDetail from "./UserDetail";
+import QuestionDetail from "./QuestionDetail";
 
 function Dashboard() {
-    const { getUserByUserId, isLogin, setIsLogin, userList, setUserList } = useContext(context);
+    const { getUserByUserId, isLogin, setIsLogin, userList, setUserList, questions } = useContext(context);
 
     const [user, setUser] = useState({});
 
@@ -22,6 +23,10 @@ function Dashboard() {
     const [user2, setUser2] = useState({});
 
     const [showQuestions, setShowQuestions] = useState(false);
+
+    const [showQuestionDetail, setShowQuestionDetail] = useState(false);
+
+    const [question, setQuestion] = useState({});
 
     const [showRoles, setShowRoles] = useState(false);
 
@@ -45,6 +50,7 @@ function Dashboard() {
         setShowRoles(false);
         setShowTags(false);
         setShowUserDetail(false);
+        setShowQuestionDetail(false);
 
         if (name == 'profile') {
             setShowProfile(true);
@@ -139,7 +145,9 @@ function Dashboard() {
                 {showUsers && <Users display = {display} userList = {userList.filter(user => user.isDeleted == false)} setUser2 = {setUser2} setShowDetail = {setShowUserDetail} />}
                 {showUserDetail && <UserDetail user = {user2}/>}
 
-                {showQuestions && <Questions/>}
+                {showQuestions && <Questions setShowQuestionDetail = {setShowQuestionDetail} display = {display} questions = {questions} setQuestion = {setQuestion}/>}
+
+                {showQuestionDetail && <QuestionDetail question = {question} />}
 
                 {showRoles && <Roles/>}
                 {showTags && <Tags/>}

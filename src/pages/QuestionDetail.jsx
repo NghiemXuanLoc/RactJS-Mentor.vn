@@ -46,7 +46,7 @@ function QuestionDetail() {
                         <div className="card-body">
                             <div className="mb-3">
                                 <h4><strong>Content</strong>: {getQuestionById(id)?.content}</h4>
-                                <p><strong>Author:</strong> {getUserByUserId(id)?.username}</p>
+                                <p><strong>Author:</strong> {getUserByUserId(getQuestionById(id).authorId)?.username}</p>
                                 <p><strong>Tags:</strong> {getQuestionById(id)?.tags.map(tag => {
                                     var t = tags.find(x => x.id == tag);
                                     return t?.name + ", ";

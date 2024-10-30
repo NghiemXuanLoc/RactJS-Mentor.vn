@@ -9,7 +9,7 @@ function Questions() {
 
     const { searchTerm, setSearchTerm, getRoleIdByRoleName, getQuestionIdMax, isLogin, questions, setQuestions, tags, setTags, getUserByUserId } = useContext(context);
 
-
+    var tagsFilter = tags.filter(tag => tag.isDeleted == false);
     const [content, setContent] = useState("");
     const [selectedTags, setSelectedTags] = useState([]);
 
@@ -91,7 +91,7 @@ function Questions() {
                         </div>
                         <div className="form-group">
                             <label>Tags</label>
-                            {tags.map((tag) => (
+                            {tagsFilter.map((tag) => (
                                 <div className="form-check" key={tag.id}>
                                     <input
                                         type="checkbox"
