@@ -32,7 +32,7 @@ const Login = () => {
       let checkAccount = -1;
 
       userList.forEach(user => {
-        if (user.email == account.email && user.password == account.password) {
+        if (user.email == account.email && user.password == account.password && user.isDeleted == false) {
           checkAccount = user.id;
           userLogin = user;
         }

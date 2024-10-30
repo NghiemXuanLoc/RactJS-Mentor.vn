@@ -31,7 +31,7 @@
       "username": "nghiem xuan loc",
       "email": "locnxhe170939@fpt.edu.vn",
       "password": "123456Aa@",
-      "roleId": null,
+      "roleId": "1",
       "phoneNumber": "",
       "address": "",
       "description": "",
@@ -106,7 +106,7 @@
     {
       "content": "noi dung moi ahihih",
       "RolesAnswer": [
-        1
+        2
       ],
       "authorId": 1,
       "tags": [
@@ -135,7 +135,9 @@
     {
       "content": "noi dung them boi nghiem xuan loc",
       "RolesAnswer": [
-        1
+        1,
+        2,
+        3
       ],
       "authorId": 1,
       "tags": [

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { context } from "../../contexts/ProviderLogin";
 
 function QuestionDetail({ question }) {
-    const { getUserByUserId, tags } = useContext(context);
+    const { getUserByUserId, tags, getRoleByRoleId } = useContext(context);
     return (
         <>
             <div className="my-4">
@@ -15,6 +15,7 @@ function QuestionDetail({ question }) {
                                 var t = tags.find(x => x.id == tag);
                                 return t?.name + ", ";
                             })}</p>
+                            <p><strong>Roles:</strong> {question.RolesAnswer.map(roleId => getRoleByRoleId(roleId)?.name + ",")}</p>
                             <p><strong>Created At:</strong> {question?.createdAt}</p>
                             <p><strong>Modified At:</strong> {question?.modifiedAt}</p>
                         </div>

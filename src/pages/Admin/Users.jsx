@@ -19,6 +19,8 @@ function Users({ userList, setShowDetail, setUser2, display }) {
         "isDeleted": false
     });
 
+    const [addRoleUser, setAddRoleUser] = useState({});
+
     const handleDelete = async (user) => {
 
         var userUpdate = {
@@ -71,6 +73,15 @@ function Users({ userList, setShowDetail, setUser2, display }) {
         await axios.post('http://localhost:9999/users', user);
     };
 
+    const handleAddRole = async () => {
+        if (addRoleUser.roleId == null) {
+            addRoleUser.roleId = 1;
+        }
+        setAddRoleUser({ ...addRoleUser, "roleId": parseInt(addRoleUser.roleId) })
+        await updateUser(addRoleUser.id, addRoleUser);
+        await fetchUsers();
+    }
+
     return (
         <>
             <h3>Users</h3>
@@ -92,6 +103,12 @@ function Users({ userList, setShowDetail, setUser2, display }) {
                                 <td>{user?.email}</td>
                                 <td>{getRoleByRoleId(user?.roleId)?.name}</td>
                                 <td>
+                                    <button
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal2"
+                                        className="btn btn-sm btn-success me-2"
+                                        onClick={() => setAddRoleUser(user)}
+                                    >Update role</button>
                                     <button onClick={() => { display(); setShowDetail(true); setUser2(user) }} className="btn btn-sm btn-primary">Detail</button>
                                     <button onClick={() => handleDelete(user)} className="btn btn-sm btn-danger ms-2">Delete</button>
                                 </td>
@@ -193,6 +210,58 @@ function Users({ userList, setShowDetail, setUser2, display }) {
                     </div>
                 </div>
             </>
+
+            <>
+
+                <div
+                    className="modal fade"
+                    id="exampleModal2"
+                    tabIndex={-1}
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                >
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="exampleModalLabel">
+                                    Add roles
+                                </h5>
+                                <button
+                                    type="button"
+                                    className="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                />
+                            </div>
+                            <div className="modal-body">
+                                <select className="form-control" onChange={(e) => setAddRoleUser({ ...addRoleUser, "roleId": e.target.value })}>
+                                    {
+
+                                        roles.map(role => {
+                                            return (
+                                                <option selected={role.id == addRoleUser.roleId ? true : false} value={role.id}>{role.name}</option>
+                                            )
+                                        })
+                                    }
+                                </select>
+                            </div>
+                            <div className="modal-footer">
+                                <button
+                                    type="button"
+                                    className="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                                >
+                                    Close
+                                </button>
+                                <button onClick={handleAddRole} type="button" className="btn btn-primary">
+                                    Save changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </>
+
 
         </>
     )
